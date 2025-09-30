@@ -28,7 +28,7 @@ export default async function HomePage({
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
       <header className="text-center my-8">
         <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter text-primary">
-          Cosmic Gallery
+          Stellar Stories
         </h1>
         <p className="text-muted-foreground mt-2 text-lg">
           NASA's Astronomy Picture of the Day
