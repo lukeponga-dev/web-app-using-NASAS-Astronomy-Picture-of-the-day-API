@@ -12,6 +12,12 @@ import {
   type SuggestRandomDateOutput
 } from '@/ai/flows/suggest-random-date';
 
+import {
+  generateStory,
+  type GenerateStoryInput,
+  type GenerateStoryOutput,
+} from '@/ai/flows/generate-story';
+
 export async function getAiSuggestions(input: SuggestInterestingDatesInput): Promise<SuggestInterestingDatesOutput> {
   try {
     const suggestions = await suggestInterestingDates(input);
@@ -36,5 +42,15 @@ export async function getRandomDateSuggestion(input: SuggestRandomDateInput): Pr
     const month = String(randomDate.getMonth() + 1).padStart(2, '0');
     const day = String(randomDate.getDate()).padStart(2, '0');
     return { date: `${year}-${month}-${day}` };
+  }
+}
+
+export async function getAiStory(input: GenerateStoryInput): Promise<GenerateStoryOutput> {
+  try {
+    const result = await generateStory(input);
+    return result;
+  } catch (error) {
+    console.error('AI story generation failed:', error);
+    return { story: 'Once upon a time, in a galaxy far, far away... something went wrong and the story could not be completed.' };
   }
 }
