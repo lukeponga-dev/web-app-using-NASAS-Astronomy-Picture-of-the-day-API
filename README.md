@@ -20,7 +20,7 @@ To get this project up and running on your local machine, follow these steps:
 
 2.  **Set up environment variables:**
 
-    Create a `.env.local` file in the root of your project and add your NASA API key:
+    Create a `.env` or `.env.local` file in the root of your project and add your NASA API key:
     ```
     NASA_API_KEY=YOUR_NASA_API_KEY
     ```
