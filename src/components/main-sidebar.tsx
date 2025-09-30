@@ -12,7 +12,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { Home, Telescope, History } from "lucide-react";
+import { Home, History } from "lucide-react";
 
 export function MainSidebar() {
   const pathname = usePathname();
