@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar as CalendarIcon, Wand2, Loader2 } from 'lucide-react';
+import { Calendar as CalendarIcon, Wand2, Loader2, Sparkles } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { getAiSuggestions } from '@/app/actions';
+import { getAiSuggestions, getRandomDateSuggestion } from '@/app/actions';
 
 interface DateControlsProps {
   currentDate: string;
@@ -19,6 +19,7 @@ export default function DateControls({
   onDateChange,
 }: DateControlsProps) {
   const [isAiLoading, setIsAiLoading] = useState(false);
+  const [isRandomLoading, setIsRandomLoading] = useState(false);
   const [suggestedDates, setSuggestedDates] = useState<string[]>([]);
   const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -37,6 +38,20 @@ export default function DateControls({
       setIsAiLoading(false);
     }
   };
+
+  const handleRandomSuggest = async () => {
+    setIsRandomLoading(true);
+    try {
+      const result = await getRandomDateSuggestion({});
+      if (result.date) {
+        onDateChange(result.date);
+      }
+    } catch (error) {
+      console.error('Failed to get random date suggestion', error);
+    } finally {
+      setIsRandomLoading(false);
+    }
+  }
   
   const handleDateSelect = (date: Date | undefined) => {
     if (date) {
@@ -52,7 +67,7 @@ export default function DateControls({
           <Button
             variant="outline"
             className={cn(
-              'w-full sm:w-[280px] justify-start text-left font-normal',
+              'w-full sm:w-[240px] justify-start text-left font-normal',
               !currentDate && 'text-muted-foreground'
             )}
           >
@@ -72,14 +87,24 @@ export default function DateControls({
       </Popover>
 
       <div className="flex flex-col items-center gap-2">
-        <Button onClick={handleAiSuggest} disabled={isAiLoading} variant="secondary" className="bg-accent text-accent-foreground hover:bg-accent/80 w-full sm:w-auto">
-          {isAiLoading ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Wand2 className="mr-2 h-4 w-4" />
-          )}
-          Suggest Dates
-        </Button>
+        <div className="flex flex-row gap-2 w-full sm:w-auto">
+          <Button onClick={handleAiSuggest} disabled={isAiLoading} variant="secondary" className="w-full sm:w-auto">
+            {isAiLoading ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Wand2 className="mr-2 h-4 w-4" />
+            )}
+            Suggest
+          </Button>
+           <Button onClick={handleRandomSuggest} disabled={isRandomLoading} variant="secondary" className="w-full sm:w-auto">
+            {isRandomLoading ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Sparkles className="mr-2 h-4 w-4" />
+            )}
+            Surprise Me
+          </Button>
+        </div>
         {suggestedDates.length > 0 && (
           <div className="flex flex-wrap gap-2 justify-center pt-2">
             {suggestedDates.map((date) => (
@@ -88,7 +113,7 @@ export default function DateControls({
                 variant="ghost"
                 size="sm"
                 onClick={() => onDateChange(date)}
-                className="text-accent-foreground bg-accent/20 hover:bg-accent/40"
+                className="text-primary hover:bg-primary/10 hover:text-primary"
               >
                 {format(new Date(date), 'MMM d, yyyy')}
               </Button>
