@@ -26,12 +26,12 @@ export default async function HomePage({
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
-      <header className="text-center my-8">
-        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter text-primary">
+      <header className="text-center my-12">
+        <h1 className="font-bold text-5xl sm:text-6xl md:text-7xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-400 to-indigo-400">
           Stellar Stories
         </h1>
-        <p className="text-muted-foreground mt-2 text-lg">
-          NASA's Astronomy Picture of the Day
+        <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
+          Explore the cosmos through the lens of NASA's Astronomy Picture of the Day, with an AI-powered twist.
         </p>
       </header>
       <main>

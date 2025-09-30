@@ -28,25 +28,25 @@ export default async function OnThisDayPage() {
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
-      <header className="my-8 text-center">
-        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter text-primary">
+      <header className="my-12 text-center">
+        <h1 className="font-bold text-5xl sm:text-6xl md:text-7xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-400 to-indigo-400">
           On This Day in History
         </h1>
-        <p className="text-muted-foreground mt-2 text-lg">
-          A look back at astronomy pictures from {format(today, 'MMMM do')}
+        <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
+          A look back at astronomy pictures from {format(today, 'MMMM do')} through the years.
         </p>
       </header>
       <main>
         {sortedApods.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sortedApods.map(apod => (
               <OnThisDayCard key={apod.date} apod={apod} />
             ))}
           </div>
         ) : (
-          <Alert className="max-w-xl mx-auto">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>No Pictures Found</AlertTitle>
+          <Alert className="max-w-xl mx-auto bg-secondary/30 border-primary/20">
+            <AlertTriangle className="h-4 w-4 text-primary" />
+            <AlertTitle className="text-primary">No Pictures Found</AlertTitle>
             <AlertDescription>
               It looks like there are no historical pictures for this date. This could be because it's a leap day or there wasn't a picture published on this day in the past.
             </AlertDescription>
