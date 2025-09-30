@@ -40,3 +40,7 @@ To get this project up and running on your local machine, follow these steps:
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [ShadCN/UI](https://ui.shadcn.com/) - Re-usable components
 - [Genkit](https://firebase.google.com/docs/genkit) - AI framework
+
+## Author
+
+- **Luke Ponga**
